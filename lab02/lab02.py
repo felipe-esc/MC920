@@ -33,7 +33,7 @@ def color_apply(img, mask, alt):
 
     for k in range(d):
         for i in range(math.floor(m_n / 2) + 1, m - math.floor(m_n / 2)):
-            for j in range(n - m_m):
+            for j in range(0, n - m_m, invert):
                 g = -1
 
                 if alt == True and i % 2 == 1:
@@ -57,7 +57,7 @@ def color_apply(img, mask, alt):
                         # distribute error
                         else:
                             offset = m_j - math.floor(m_n / 2)
-                            offset *= invert
+                            # offset *= invert
                             x = i + offset
                             y = j + m_i
                             # apply error
@@ -71,7 +71,7 @@ def gray_apply(img, mask, alt):
     invert = 1
 
     for i in range(math.floor(m_n / 2) + 1, m - math.floor(m_n / 2)):
-        for j in range(n - (m_m - 1)):
+        for j in range(0, n - (m_m - 1), invert):
             g = -1
 
             if alt == True and j % 2 == 1:
@@ -95,7 +95,7 @@ def gray_apply(img, mask, alt):
                     # distribute error
                     else:
                         offset = m_j - math.floor(m_n / 2)
-                        offset *= invert
+                        # offset *= invert
                         x = i + offset
                         y = j + m_i
                         # apply error
