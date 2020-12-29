@@ -87,7 +87,7 @@ def main(argv):
     hist = False
     
     try:
-        opts, args = getopt.getopt(argv, "hi:o:", ["input-file=","output-file=", "hist"])
+        opts, args = getopt.getopt(argv, "hi:o:", ["input-file=","output-file=", "histogram"])
     except getopt.GetoptError:
         sys.exit(2)
     

@@ -63,7 +63,7 @@ def remove_non_ascii(text):
 def main(argv):
     input_img = ''
     output_img = ''
-    code = None
+    code = -1
     text = ''
     separate = False
     bits_plan = -1
@@ -75,7 +75,7 @@ def main(argv):
                                     [
                                         "input-file=",
                                         "output-file=",
-                                        "textfile=",
+                                        "text=",
                                         "bit-plan=",
                                         "code",
                                         "decode",
@@ -90,12 +90,12 @@ def main(argv):
             input_img = arg
         elif opt in ("-o", "--output-file"):
             output_img = arg
-        elif opt in ("-t", "--textfile"):
+        elif opt in ("-t", "--text"):
             text = arg
         elif opt in ("-c", "--code"):
-            code = True
+            code = 1
         elif opt in ("-d", "--decode"):
-            code = False
+            code = 0
         elif opt in ("-s", "--separate"):
             separate = True
         elif opt in ("-b", "--bit-plan"):
@@ -106,8 +106,14 @@ def main(argv):
     if code:
         while output_img == '':
             output_img = input('Output image file name: ')
-    if code == None:
-        code = str(input("Code or Decode (c/d): ")) == 'c'
+    while code == -1:
+        code_option = str(input("Code or Decode (c/d): "))
+        if code_option == 'c':
+            code = 1
+        elif code_option == 'd':
+            code = 0
+        else:
+            print("Invalid option! Try again.")
     while bits_plan < 0 or bits_plan > 2:
         bits_plan = int("Select a bit plan (0, 1 or 2): ")
     
@@ -120,7 +126,7 @@ def main(argv):
         text = str(input("Please enter message or textfile to hide: "))
 
     # code
-    if code:
+    if code == 1:
         # read message from file
         if text.endswith(".txt"):
             file = open(text, "r")
